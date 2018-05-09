@@ -29,6 +29,28 @@ export default class KAryTree {
       }
     }
   }
+  find(root, value) {
+    if (!this.root) {
+      return null;
+    }
+
+    const queue = new Queue();
+    queue.enqueue(root);
+
+    let currentNode = null;
+
+    while (!queue.isEmpty()) {
+      currentNode = queue.dequeue();
+
+      for (let i = 0; i < currentNode.children.length; i++) {
+        queue.enqueue(currentNode.children[i]);
+        if (currentNode.children[i].value === value) {
+          return currentNode.children[i].value;
+        }
+      }
+    }
+    return undefined;
+  }
 
   stringChildren(root) {
     if (!this.root) {
