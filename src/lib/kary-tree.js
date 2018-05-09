@@ -14,7 +14,7 @@ export default class KAryTree {
     return this._breadthFirstSearch(this.root);
   }
 
-  _breadthFirstSearch(root) {
+  _breadthFirstSearch(root) { //eslint-disable-line
     const queue = new Queue();
     queue.enqueue(root);
 
