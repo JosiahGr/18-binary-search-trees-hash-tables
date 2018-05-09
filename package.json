@@ -9,11 +9,6 @@
     "dbon": "mkdir -p ./db && mongod --dbpath ./db",
     "dboff": "killall mongod"
   },
-  "jest": {
-    "setupFiles": [
-      "<rootDir>/src/__test__/lib/test.env.js"
-    ]
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JosiahGr/18-binary-search-trees-hash-tables.git"
@@ -34,5 +29,8 @@
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jest": "^21.15.1",
     "jest": "^22.4.3"
+  },
+  "dependencies": {
+    "queue-fifo": "^0.2.4"
   }
 }
