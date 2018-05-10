@@ -45,4 +45,19 @@ describe('kary-tree.js', () => {
     const emptyTree = new KAryTree(null);
     expect(emptyTree.find(emptyTree.root, 3)).toEqual(null);
   });
+  test('#toArray should perform a depth first traversal and push trees elements to an array', () => {
+    const one = new KAryNode(1);
+    one.appendChild(2);
+    one.appendChild(3);
+    one.appendChild(4); 
+
+    one.children[1].appendChild(5);
+    one.children[1].appendChild(6);
+    one.children[1].appendChild(7);
+
+    one.children[1].children[1].appendChild(8);
+
+    const kAryTree = new KAryTree(one);
+    expect(kAryTree.toArray()).toEqual([4, 2]);
+  });
 });
