@@ -9,11 +9,6 @@
     "dbon": "mkdir -p ./db && mongod --dbpath ./db",
     "dboff": "killall mongod"
   },
-  "jest": {
-    "setupFiles": [
-      "<rootDir>/src/__test__/lib/test.env.js"
-    ]
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JosiahGr/18-binary-search-trees-hash-tables.git"

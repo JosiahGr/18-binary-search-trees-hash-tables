@@ -1,6 +1,7 @@
 'use strict';
 
 import Queue from 'queue-fifo';
+import Stack from './stack';
 
 export default class KAryTree {
   constructor(root) {
@@ -23,10 +24,88 @@ export default class KAryTree {
     while (!queue.isEmpty()) {
       currentNode = queue.dequeue();
 
-      console.log(`Visiting ${currentNode.value}`);
+      // console.log(`visiting ${currentNode.value}`);
       for (let i = 0; i < currentNode.children.length; i++) {
         queue.enqueue(currentNode.children[i]);
       }
     }
+  }
+
+  depthFirstSearch() { 
+    if (!this.root) return null;
+    return this._depthFirstSearch(this.root);
+  }
+
+  _depthFirstSearch(root, callback) { //eslint-disable-line
+    const stack = new Stack();
+    stack.push(root);
+  
+    let currentNode = null;
+  
+    while (!stack.isEmpty()) {
+      currentNode = stack.pop();
+
+      callback(currentNode.value);
+      for (let i = 0; i < currentNode.children.length; i++) {
+        stack.push(currentNode.children[i]);
+      }
+    }
+  }
+
+  find(root, value) {
+    if (!this.root) {
+      return null;
+    }
+
+    const queue = new Queue();
+    queue.enqueue(root);
+
+    let currentNode = null;
+
+    while (!queue.isEmpty()) {
+      currentNode = queue.dequeue();
+
+      for (let i = 0; i < currentNode.children.length; i++) {
+        queue.enqueue(currentNode.children[i]);
+        if (currentNode.children[i].value === value) {
+          return currentNode.children[i].value;
+        }
+      }
+    }
+    return undefined;
+  }
+
+  stringChildren(root) {
+    if (!this.root) {
+      return null;
+    }
+
+    const queue = new Queue();
+    let kAryString = '';
+    queue.enqueue(root);
+
+    let currentNode = null;
+
+    while (!queue.isEmpty()) {
+      currentNode = queue.dequeue();
+
+      for (let i = 0; i < currentNode.children.length; i++) {
+        queue.enqueue(currentNode.children[i]);
+        kAryString += currentNode.children[i].value.toString();
+      }
+    }
+    return kAryString;
+  }
+
+  toArray() {
+    const values = [];
+    const results = (nodeValue) => {
+      values.push(nodeValue);
+    };
+    if (!this.root) {
+      return null;
+    }
+    this._depthFirstSearch(this.root, results);
+    return values;
   }
 }
