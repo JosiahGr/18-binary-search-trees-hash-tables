@@ -15,7 +15,7 @@ export default class KAryTree {
     return this._breadthFirstSearch(this.root);
   }
 
-  _breadthFirstSearch(root, callback) { //eslint-disable-line
+  _breadthFirstSearch(root) { //eslint-disable-line
     const queue = new Queue();
     queue.enqueue(root);
 
@@ -27,6 +27,27 @@ export default class KAryTree {
       // console.log(`visiting ${currentNode.value}`);
       for (let i = 0; i < currentNode.children.length; i++) {
         queue.enqueue(currentNode.children[i]);
+      }
+    }
+  }
+
+  depthFirstSearch() { 
+    if (!this.root) return null;
+    return this._depthFirstSearch(this.root);
+  }
+
+  _depthFirstSearch(root, callback) { //eslint-disable-line
+    const stack = new Stack();
+    stack.push(root);
+  
+    let current = null;
+  
+    while (!stack.isEmpty()) {
+      current = stack.pop();
+
+      callback(current.value);
+      for (let i = 0; i < current.children.length; i++) {
+        stack.push(current.children[i]);
       }
     }
   }
@@ -76,25 +97,15 @@ export default class KAryTree {
     return kAryString;
   }
 
-  toArray(root) {
+  toArray() {
+    const values = [];
+    const results = (nodeValue) => {
+      values.push(nodeValue);
+    };
     if (!this.root) {
       return null;
     }
-    const stack = new Stack();
-    const newArray = [];
-
-    stack.pushToTop(root);
-
-    let currentNode = null;
-
-    while (!stack.isEmpty()) {
-      currentNode = stack.popOffTop();
-      stack.pushToTop(currentNode);
-
-      for (let i = 0; i < currentNode.children.length; i++) {
-        stack.pushToTop(currentNode.children[i]);
-      }
-    }
-    return newArray;
+    this._depthFirstSearch(this.root, results);
+    return values;
   }
 }

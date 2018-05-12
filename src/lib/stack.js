@@ -1,27 +1,18 @@
 'use strict';
 
-import Node from './node';
-
 export default class Stack {
   constructor() {
-    this.top = null;
+    this._storage = [];
   }
   
-  pushToTop(value) {
-    const node = new Node(value);
-    node.next = this.top;
-    this.top = node;
-    return this;
+  push(value) {
+    this._storage.push(value);
   }
-  popOffTop() {
-    this.top = this.top.next;
-    return this;
-  }
-  peek() {
-    return this.top.value;
+  pop() {
+    return this._storage.pop();
   }
   isEmpty() {
-    if (this.top === null) {
+    if (this._storage.length < 1) {
       return true;
     }
     return false;

@@ -58,6 +58,6 @@ describe('kary-tree.js', () => {
     one.children[1].children[1].appendChild(8);
 
     const kAryTree = new KAryTree(one);
-    expect(kAryTree.toArray()).toEqual([4, 2]);
+    expect(kAryTree.toArray()).toEqual([1, 4, 3, 7, 6, 8, 5, 2]);
   });
 });
