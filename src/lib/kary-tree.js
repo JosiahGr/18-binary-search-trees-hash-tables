@@ -40,14 +40,14 @@ export default class KAryTree {
     const stack = new Stack();
     stack.push(root);
   
-    let current = null;
+    let currentNode = null;
   
     while (!stack.isEmpty()) {
-      current = stack.pop();
+      currentNode = stack.pop();
 
-      callback(current.value);
-      for (let i = 0; i < current.children.length; i++) {
-        stack.push(current.children[i]);
+      callback(currentNode.value);
+      for (let i = 0; i < currentNode.children.length; i++) {
+        stack.push(currentNode.children[i]);
       }
     }
   }
